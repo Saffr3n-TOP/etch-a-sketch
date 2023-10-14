@@ -23,10 +23,14 @@ changeGridWidthBtn.addEventListener('click', () => {
 function populateGrid() {
   grid.innerHTML = '';
 
+  cellSize = grid.offsetHeight / gridWidth;
+
   for (let i = 0; i < gridWidth; i++) {
     for (let j = 0; j < gridWidth; j++) {
       const cell = document.createElement('div');
       cell.className = 'cell';
+      cell.style.width = cellSize + 'px';
+      cell.style.height = cellSize + 'px';
 
       cell.addEventListener(
         'mouseover',
