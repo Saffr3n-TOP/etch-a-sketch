@@ -1,19 +1,41 @@
+const minGridWidth = 1;
+const maxGridWidth = 100;
+let gridWidth = 16;
+
 const grid = document.querySelector('.grid');
-const gridWidth = 16;
-const gridHeight = 16;
+const changeGridWidthBtn = document.querySelector('button');
+
+changeGridWidthBtn.addEventListener('click', () => {
+  const inputValue = +prompt('Choose the grid width (100 max):');
+
+  if (
+    isNaN(inputValue) ||
+    inputValue < minGridWidth ||
+    inputValue > maxGridWidth
+  ) {
+    return alert('The grid width can only be a number from 1 to 100');
+  }
+
+  gridWidth = inputValue;
+  populateGrid();
+});
 
 function populateGrid() {
-  for (let i = 0; i < gridHeight; i++) {
+  grid.innerHTML = '';
+
+  for (let i = 0; i < gridWidth; i++) {
     for (let j = 0; j < gridWidth; j++) {
       const cell = document.createElement('div');
       cell.className = 'cell';
 
-      cell.addEventListener('mouseover', () => {
-        cell.style.background = 'black';
-      }, { once: true });
+      cell.addEventListener(
+        'mouseover',
+        () => (cell.style.background = 'black'),
+        { once: true }
+      );
 
       if (j < gridWidth - 1) cell.style.borderRight = '1px solid black';
-      if (i < gridHeight - 1) cell.style.borderBottom = '1px solid black';
+      if (i < gridWidth - 1) cell.style.borderBottom = '1px solid black';
 
       grid.appendChild(cell);
     }
